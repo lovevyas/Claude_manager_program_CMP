@@ -1,0 +1,59 @@
+:root {
+  --bg: #f7f6fb; --surface: #ffffff; --text: #1d1b2e; --muted: #5b5870;
+  --border: #dcd9e8; --accent: #4a3aa7; --accent-text: #ffffff;
+  --good: #1f7a4d; --warn-bg: #fff4d6; --warn-text: #6b4a00; --err-bg: #fde8e8; --err-text: #8a1c1c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14131c; --surface: #1d1c29; --text: #ecebf5; --muted: #a7a4bd;
+    --border: #35334a; --accent: #9d90f0; --accent-text: #14131c;
+    --good: #5bd39b; --warn-bg: #3a3014; --warn-text: #f3d98a; --err-bg: #3b1d1f; --err-text: #f5b3b3;
+  }
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif; }
+.top, main { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+.top { padding-top: 32px; }
+h1 { margin: 0 0 4px; font-size: 1.7rem; }
+.lede { margin: 0 0 24px; color: var(--muted); }
+form, #result, .progress { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 24px; }
+.field { display: block; margin: 0 0 18px; }
+.field > span, .field > label, legend { display: block; font-weight: 600; margin-bottom: 6px; }
+small { color: var(--muted); font-weight: 400; }
+textarea, input[type="file"] { width: 100%; font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px; }
+textarea { resize: vertical; }
+textarea:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.tasks { border: 0; padding: 0; margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.tasks label { font-weight: 600; }
+.tasks label span { font-weight: 400; color: var(--muted); }
+#chart-preview { display: block; max-width: 100%; max-height: 260px; margin-top: 10px; border: 1px solid var(--border); border-radius: 8px; }
+button { font: inherit; font-weight: 600; background: var(--accent); color: var(--accent-text); border: 0; border-radius: 8px; padding: 12px 22px; cursor: pointer; }
+button:disabled { opacity: .55; cursor: not-allowed; }
+button.secondary { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.notice { padding: 12px 16px; border-radius: 8px; background: var(--err-bg); color: var(--err-text); margin-bottom: 16px; }
+.progress { display: flex; align-items: center; gap: 14px; }
+.spinner { width: 22px; height: 22px; border: 3px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.9s linear infinite; flex: none; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 3s; } }
+.overall { display: flex; gap: 20px; align-items: center; margin-bottom: 20px; }
+.overall h2 { margin: 0 0 4px; font-size: 1.1rem; }
+.overall p { margin: 0; color: var(--muted); }
+.band { flex: none; width: 84px; height: 84px; border-radius: 50%; display: grid; place-items: center; font-size: 2rem; font-weight: 700; background: var(--accent); color: var(--accent-text); }
+.warn { margin-top: 8px !important; padding: 6px 10px; border-radius: 6px; background: var(--warn-bg); color: var(--warn-text) !important; }
+.criteria { display: grid; gap: 14px; }
+.criterion { border: 1px solid var(--border); border-radius: 10px; padding: 14px 16px; }
+.criterion header { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.criterion h3 { margin: 0; font-size: 1rem; }
+.criterion .score { font-weight: 700; font-size: 1.2rem; color: var(--accent); }
+.criterion p { margin: 6px 0; }
+.criterion h4 { margin: 10px 0 2px; font-size: .85rem; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+.criterion ul { margin: 0; padding-left: 20px; }
+h3 { margin-top: 24px; }
+.errors { list-style: none; padding: 0; display: grid; gap: 10px; }
+.errors li { border-left: 4px solid var(--accent); padding: 6px 12px; background: var(--bg); border-radius: 0 8px 8px 0; }
+.errors q { font-style: italic; }
+.errors .tag { font-size: .75rem; text-transform: uppercase; color: var(--muted); letter-spacing: .04em; }
+.errors .fix { color: var(--good); }
+.disclaimer { color: var(--muted); font-size: .9rem; }
+@media (max-width: 520px) { .overall { flex-direction: column; align-items: flex-start; } }

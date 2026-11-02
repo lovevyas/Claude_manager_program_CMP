@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IELTS Writing Rater</title>
+  <meta name="description" content="Get an AI band estimate for IELTS Writing Task 1 and Task 2 on the four official criteria.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>IELTS Writing Rater</h1>
+    <p class="lede">Paste your Task 1 or Task 2 response and get a band estimate on the four IELTS criteria, with specific feedback.</p>
+  </header>
+
+  <main>
+    <div id="notice" class="notice" role="alert" hidden></div>
+
+    <form id="form" novalidate>
+      <fieldset class="tasks">
+        <legend>Task</legend>
+        <label><input type="radio" name="task" value="1" checked> Task 1 <span>report on a chart, graph or diagram</span></label>
+        <label><input type="radio" name="task" value="2"> Task 2 <span>essay</span></label>
+      </fieldset>
+
+      <label class="field">
+        <span>Question</span>
+        <textarea id="prompt" rows="3" maxlength="2000" placeholder="Paste the task question exactly as it appeared." required></textarea>
+      </label>
+
+      <div class="field" id="chart-field">
+        <label for="chart">Chart image <small>(optional, lets the grader check your figures)</small></label>
+        <input id="chart" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+        <img id="chart-preview" alt="Chart preview" hidden>
+      </div>
+
+      <label class="field">
+        <span>Your response</span>
+        <textarea id="essay" rows="14" placeholder="Write or paste your response here." required></textarea>
+        <small id="count" aria-live="polite">0 words</small>
+      </label>
+
+      <button id="submit" type="submit">Get my band estimate</button>
+    </form>
+
+    <section id="progress" class="progress" hidden aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <p id="progress-text">Grading your response. This usually takes under a minute.</p>
+    </section>
+
+    <section id="result" hidden aria-live="polite">
+      <div class="overall">
+        <div class="band" id="overall">–</div>
+        <div>
+          <h2>Estimated overall band</h2>
+          <p id="summary"></p>
+          <p id="length-note" class="warn" hidden></p>
+        </div>
+      </div>
+      <div id="criteria" class="criteria"></div>
+      <h3>Key corrections</h3>
+      <ul id="errors" class="errors"></ul>
+      <p class="disclaimer">This is an AI estimate for practice, not an official IELTS score. Real examiners may score differently, so treat it as guidance.</p>
+      <button id="again" type="button" class="secondary">Grade another response</button>
+    </section>
+  </main>
+
+  <script src="app.js" type="module"></script>
+</body>
+</html>
